@@ -41,7 +41,7 @@ public ArrayList <DisparoJugadorLienzo> disparos;
 	
 	public void dispararPapu(){
 		if(puedeDisparar){
-		disparos.add(new DisparoJugadorLienzo(this.mundo, this.posiciones, this.aceleracion,mundo.ins.angulo,1));
+		disparos.add(new DisparoJugadorLienzo(this.mundo, this.posiciones, this.aceleracion,mundo.ins.angulo,1,mundo.cohete));
 		puedeDisparar=false;
 		}
 		

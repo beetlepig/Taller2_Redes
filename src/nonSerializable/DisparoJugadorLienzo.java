@@ -1,6 +1,7 @@
 package nonSerializable;
 
 import processing.core.PApplet;
+import processing.core.PImage;
 import processing.core.PVector;
 import serializable.DisparoJugadorLienzoS;
 
@@ -18,9 +19,11 @@ public class DisparoJugadorLienzo {
 	private float cmabioY;
 	private float cambioX;
 	int invocador;
-	public DisparoJugadorLienzo (Logica mundo,PVector pos, PVector vel, float angulo, int invocador){
+	PImage img;
+	public DisparoJugadorLienzo (Logica mundo,PVector pos, PVector vel, float angulo, int invocador,PImage img){
 		this.invocador=invocador;
 		this.mundo=mundo;
+		this.img=img;
 		posi= new PVector();
 		posi.set(pos);
 		velo= new PVector();
@@ -46,7 +49,7 @@ public class DisparoJugadorLienzo {
 			velBackup.set(velo);	
 		}
 		
-		this.angulo= PApplet.degrees(angulo);
+		this.angulo= angulo;
 	
 		
 		evaluarDisparoMuerto();
@@ -60,8 +63,11 @@ public class DisparoJugadorLienzo {
 		y+=yvel*2;
 		
 	
-		
-		this.mundo.app.ellipse(posi.x+cambioX,posi.y+cmabioY, 10, 10);
+		this.mundo.app.pushMatrix();
+		this.mundo.app.translate(posi.x+cambioX, posi.y+cmabioY);
+		this.mundo.app.rotate(PApplet.radians(-angulo));
+		this.mundo.app.image(img,0,0);
+		this.mundo.app.popMatrix();
 		
 	   
 		

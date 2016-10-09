@@ -31,7 +31,7 @@ private PImage perImg;
 private PImage baseCanon;
 private PImage canon;
 private PImage fondoDeTierra;
-private PImage cohete;
+public PImage cohete;
 public InstruccionAndroid ins;
 private PVector posPlayer;
 
@@ -86,7 +86,7 @@ PVector velocidad= new PVector();
 		fondoDeTierra= app.loadImage("fondoTierra-03.png");
 		baseCanon= app.loadImage("baseChango-03.png");
 		canon= app.loadImage("canon-03.png");
-		cohete= app.loadImage("");
+		cohete= app.loadImage("misolote-04.png");
 	}
 	
 	public void pintar(){
@@ -198,7 +198,7 @@ PVector velocidad= new PVector();
 				DisparoJugadorLienzoS posisYDemas= (DisparoJugadorLienzoS) arg;
 				if(posisYDemas.lado.equalsIgnoreCase("derecho")){
 				PVector posis= new PVector(0,posisYDemas.posiciones.y-100);
-				diparadorIz.disparos.add(new DisparoJugadorLienzo(this, posis, posisYDemas.velocidad, posisYDemas.angulo,2));
+				diparadorIz.disparos.add(new DisparoJugadorLienzo(this, posis, posisYDemas.velocidad, posisYDemas.angulo,2,cohete));
 			}
 			}
 		}
@@ -207,7 +207,7 @@ PVector velocidad= new PVector();
 				DisparoJugadorLienzoS posisYDemas= (DisparoJugadorLienzoS) arg;
 				if(posisYDemas.lado.equalsIgnoreCase("izquierdo")){
 				PVector posis= new PVector(510,posisYDemas.posiciones.y-100);
-				diparadorDer.disparos.add(new DisparoJugadorLienzo(this, posis, posisYDemas.velocidad, posisYDemas.angulo,2));
+				diparadorDer.disparos.add(new DisparoJugadorLienzo(this, posis, posisYDemas.velocidad, posisYDemas.angulo,2,cohete));
 			}
 			}
 		}

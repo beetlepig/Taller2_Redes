@@ -36,7 +36,7 @@ public PImage coheteEnemigo;
 private PImage imgVida;
 public InstruccionAndroid ins;
 private PVector posPlayer;
-
+private PImage canonDamaged;
 //-------------------------------------------------------------------------------------
 PVector posMap;
 float xJu=250;
@@ -70,11 +70,11 @@ PVector velocidad= new PVector();
 		}else if(com.getIdentifier()==2){
 			disparosDecanon= new ArrayList<>();
 			posPlayer= new PVector();
-			diparadorIz= new Canon(app,canon,com.getIdentifier());
+			diparadorIz= new Canon(app,canon,com.getIdentifier(),canonDamaged);
 		}else if (com.getIdentifier()==3){
 			disparosDecanon= new ArrayList<>();
 			posPlayer= new PVector();
-			diparadorDer= new Canon(app, canon,com.getIdentifier());
+			diparadorDer= new Canon(app, canon,com.getIdentifier(),canonDamaged);
 			String s= "ComenzoEsto";
 			com.sendObjectMessage(s);
           
@@ -92,6 +92,7 @@ PVector velocidad= new PVector();
 		cohete= app.loadImage("misolote-ali-04.png");
 		coheteEnemigo= app.loadImage("misolote-04.png");
 		imgVida= app.loadImage("barraVida-04.png");
+		canonDamaged= app.loadImage("canondamaged-01.png");
 	}
 	
 	public void pintar(){

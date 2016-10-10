@@ -8,8 +8,11 @@ import processing.core.PVector;
 import serializable.PosJugador;
 
 public class PersonajeUsuario extends Thread{
+public int vidas=5;
+public int posLineaDerX=263;
 Logica mundo;
 PImage img;
+PImage imgVida;
 PVector posiciones;
 boolean vivoHilo;
 private boolean limiteDer;
@@ -17,10 +20,11 @@ private boolean limiteIz;
 PVector aceleracion;
 private boolean puedeDisparar;
 public ArrayList <DisparoJugadorLienzo> disparos;
-	public PersonajeUsuario(Logica mundo, PImage perimg) {
+	public PersonajeUsuario(Logica mundo, PImage perimg, PImage viditas) {
 	vivoHilo=true;
 	this.mundo=mundo;
 	this.img=perimg;
+	this.imgVida=viditas;
 	disparos= new ArrayList<>();
 	posiciones= new PVector(300,340);
 	aceleracion= new PVector();
@@ -37,6 +41,16 @@ public ArrayList <DisparoJugadorLienzo> disparos;
 		for (int i = 0; i < disparos.size(); i++) {
 			disparos.get(i).pintar();
 		}
+		int PosVidaRestadaX= (int) PApplet.map(vidas, 5, 0, 263, 115);
+		if(posLineaDerX>PosVidaRestadaX){
+			posLineaDerX--;
+		}
+		
+		mundo.app.strokeWeight(21);
+	    mundo.app.stroke(0,200,100,200);
+		mundo.app.line(113,650, posLineaDerX, 650);
+		mundo.app.strokeWeight(1);
+		mundo.app.image(imgVida, 140, 650);
 	}
 	
 	public void dispararPapu(){

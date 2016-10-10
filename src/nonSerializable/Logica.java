@@ -32,6 +32,8 @@ private PImage baseCanon;
 private PImage canon;
 private PImage fondoDeTierra;
 public PImage cohete;
+public PImage coheteEnemigo;
+private PImage imgVida;
 public InstruccionAndroid ins;
 private PVector posPlayer;
 
@@ -56,7 +58,7 @@ PVector velocidad= new PVector();
 			f[1]=1;
 			ins= new InstruccionAndroid(0, 0, 0, 0, 0, f, false, "0");
 		
-		this.usuario= new PersonajeUsuario(this,perImg);
+		this.usuario= new PersonajeUsuario(this,perImg,imgVida);
 	
 		usuario.start();
 		
@@ -64,6 +66,7 @@ PVector velocidad= new PVector();
 		
 		posMap=new PVector(841,750);
 		new Thread(mandarposis()).start();
+		new Thread(evaluarChoqueConJugador()).start();
 		}else if(com.getIdentifier()==2){
 			disparosDecanon= new ArrayList<>();
 			posPlayer= new PVector();
@@ -86,7 +89,9 @@ PVector velocidad= new PVector();
 		fondoDeTierra= app.loadImage("fondoTierra-03.png");
 		baseCanon= app.loadImage("baseChango-03.png");
 		canon= app.loadImage("canon-03.png");
-		cohete= app.loadImage("misolote-04.png");
+		cohete= app.loadImage("misolote-ali-04.png");
+		coheteEnemigo= app.loadImage("misolote-04.png");
+		imgVida= app.loadImage("barraVida-04.png");
 	}
 	
 	public void pintar(){
@@ -240,6 +245,35 @@ PVector velocidad= new PVector();
 		};
 		
 		return r;
+	}
+	
+	private Runnable evaluarChoqueConJugador(){
+		Runnable r =new Runnable() {
+			
+			
+			public void run() {
+				while(true){
+					try{
+				for (int i = 0; i < disparitos.size(); i++) {
+					if(PApplet.dist(disparitos.get(i).posx, disparitos.get(i).posy, usuario.posiciones.x, usuario.posiciones.y)<40){
+						if(usuario.vidas>0){
+						usuario.vidas-=1;
+						}
+						disparitos.remove(i);
+					}
+					
+				}
+				Thread.sleep(20);
+				}catch(InterruptedException e){
+					e.printStackTrace();
+				}
+			}
+				
+			}
+		};
+		
+		return r;
+		
 	}
 
 

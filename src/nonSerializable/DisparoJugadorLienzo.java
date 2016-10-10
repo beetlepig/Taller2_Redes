@@ -48,8 +48,11 @@ public class DisparoJugadorLienzo {
 		}else{
 			velBackup.set(velo);	
 		}
-		
-		this.angulo= angulo;
+		if(invocador==1){
+		this.angulo= PApplet.radians(-angulo);
+		}else{
+			this.angulo= PApplet.radians(angulo);
+		}
 	
 		
 		evaluarDisparoMuerto();
@@ -65,7 +68,7 @@ public class DisparoJugadorLienzo {
 	
 		this.mundo.app.pushMatrix();
 		this.mundo.app.translate(posi.x+cambioX, posi.y+cmabioY);
-		this.mundo.app.rotate(PApplet.radians(-angulo));
+		this.mundo.app.rotate(angulo);
 		this.mundo.app.image(img,0,0);
 		this.mundo.app.popMatrix();
 		

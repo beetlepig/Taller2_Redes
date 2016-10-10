@@ -49,6 +49,7 @@ public ArrayList <DisparoJugadorLienzo> disparos;
 		mundo.app.strokeWeight(21);
 	    mundo.app.stroke(0,200,100,200);
 		mundo.app.line(113,650, posLineaDerX, 650);
+		 mundo.app.stroke(200,50,80,250);
 		mundo.app.strokeWeight(1);
 		mundo.app.image(imgVida, 140, 650);
 	}

@@ -180,10 +180,14 @@ PVector velocidad= new PVector();
 		 if(aprovacion.equalsIgnoreCase("ComenzoEsto")){
 	 if(com.getIdentifier()==2){
 		 
-			new Thread(diparadorIz.disparo()).start();
+	//		new Thread(diparadorIz.disparo()).start();
+			diparadorIz.di.start();
+			new Thread(evaluarChoqueConCanon()).start();
 		}
 	   if(com.getIdentifier()==3){
-		   new Thread(diparadorDer.disparo()).start();
+		   diparadorDer.di.start();
+		   new Thread(evaluarChoqueConCanon()).start();
+	//	   new Thread(diparadorDer.disparo()).start();
 	   }
 		 }
 	 }
@@ -274,6 +278,56 @@ PVector velocidad= new PVector();
 		
 		return r;
 		
+	}
+	
+	private Runnable evaluarChoqueConCanon(){
+		Runnable r= new Runnable() {
+			
+			
+			public void run() {
+				
+				while(true){
+					try{
+				if(com.getIdentifier()==2){
+					
+					for (int i = 0; i < diparadorIz.disparos.size() ; i++) {
+						if(PApplet.dist(diparadorIz.disparos.get(i).posi.x, diparadorIz.disparos.get(i).posi.y, 250, 250)<150){
+							if(diparadorIz.vidas>0){
+							diparadorIz.vidas-=1;
+							}else if(diparadorIz.vidas==0){
+								diparadorIz.di.interrupt();
+							}
+							diparadorIz.disparos.remove(i);
+						}
+						
+					}
+				}
+              if(com.getIdentifier()==3){
+					
+					for (int i = 0; i < diparadorDer.disparos.size() ; i++) {
+						if(PApplet.dist(diparadorDer.disparos.get(i).posi.x, diparadorDer.disparos.get(i).posi.y, 250, 250)<150){
+							if(diparadorDer.vidas>0){
+							diparadorDer.vidas-=1;
+							}else if(diparadorDer.vidas==0){
+								diparadorDer.di.interrupt();
+							}
+							diparadorDer.disparos.remove(i);
+						}
+						
+					}
+				}
+              Thread.sleep(20);
+				}catch (InterruptedException e){
+					e.printStackTrace();
+				}
+				
+              
+			}
+				
+			}
+		};
+		
+		return r;
 	}
 
 
